@@ -25,7 +25,7 @@ find / -type f -executable -perm -4000 -ls 2>/dev/null | sort -k 3
 echo ""
 echo "Setgid files:"
 echo "============="
-find / -type f -executable -perm -0040 -ls 2>/dev/null | sort -k 3
+find / -type f -executable -perm -0040 -ls 2>/dev/null | sort -k 6
 
 echo "Setuid files condensed to 10 largest files found (MB):"
 echo "============="
