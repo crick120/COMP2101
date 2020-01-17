@@ -33,6 +33,5 @@ find / -type f -executable -perm -4000 -ls 2>/dev/null | sort -r -n | head -10 |
 echo ""
 echo "Setgid files condensed to 10 largest files found (MB):"
 echo "============="
-echo ""
 find / -type f -executable -perm -0040 -ls 2>/dev/null | sort -r -n | head -10 | awk 'BEGIN{mega=1048576} $5 >= mega {$5 = $5/mega "MB"} {print}' | awk '{$1=$2=$3=$4=$7=$8=$9=$10=""; print $0}'
 echo ""
