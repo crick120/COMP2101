@@ -21,9 +21,9 @@
 
 echo "Setuid files:"
 echo "============="
-find / -type f -executable -perm -4000 -ls 2>/dev/null | sort -k 3
+find / -type f -executable -perm -4000 -ls 2>/dev/null | sort -r -n | head -10
 echo ""
 echo "Setgid files:"
 echo "============="
-find / -type f -executable -perm -4000 -ls 2>/dev/null | sort -k 3
+find / -type f -executable -perm -0040 -ls 2>/dev/null | sort -r -n | head -10
 echo ""
