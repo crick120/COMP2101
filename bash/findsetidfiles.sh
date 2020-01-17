@@ -26,10 +26,13 @@ echo ""
 echo "Setgid files:"
 echo "============="
 find / -type f -executable -perm -0040 -ls 2>/dev/null | sort -k 6
-
+echo ""
 echo "Setuid files condensed to 10 largest files found (MB):"
 echo "============="
-find / -type f -executable -perm -4000 -ls 2>/dev/null | sort -r -n | head -10 | awk 'BEGIN{mega=1048576} $5 >= mega {$5 = $5/mega "MB"} {print}'
+find / -type f -executable -perm -4000 -ls 2>/dev/null | sort -r -n | head -10 | awk 'BEGIN{mega=1048576} $5 >= mega {$5 = $5/mega "MB"} {print}' | awk '{$1=$2=$3=$4=$7=$8=$9=$10=""; print $0}'
+echo ""
 echo "Setgid files condensed to 10 largest files found (MB):"
 echo "============="
-find / -type f -executable -perm -0040 -ls 2>/dev/null | sort -r -n | head -10 | awk 'BEGIN{mega=1048576} $5 >= mega {$5 = $5/mega "MB"} {print}'
+echo ""
+find / -type f -executable -perm -0040 -ls 2>/dev/null | sort -r -n | head -10 | awk 'BEGIN{mega=1048576} $5 >= mega {$5 = $5/mega "MB"} {print}' | awk '{$1=$2=$3=$4=$7=$8=$9=$10=""; print $0}'
+echo ""
