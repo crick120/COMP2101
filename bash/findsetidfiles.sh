@@ -21,9 +21,15 @@
 
 echo "Setuid files:"
 echo "============="
-find / -type f -executable -perm -4000 -ls 2>/dev/null | sort -r -n | head -10
+find / -type f -executable -perm -4000 -ls 2>/dev/null | sort -k 3
 echo ""
 echo "Setgid files:"
 echo "============="
-find / -type f -executable -perm -0040 -ls 2>/dev/null | sort -r -n | head -10
-echo ""
+find / -type f -executable -perm -0040 -ls 2>/dev/null | sort -k 3
+
+echo "Setuid files condensed to 10 largest files found (MB):"
+echo "============="
+find / -type f -executable -perm -4000 -ls 2>/dev/null | sort -r -n | head -10 | awk 'BEGIN{mega=1048576} $5 >= mega {$5 = $5/mega "MB"} {print}'
+echo "Setgid files condensed to 10 largest files found (MB):"
+echo "============="
+find / -type f -executable -perm -0040 -ls 2>/dev/null | sort -r -n | head -10 | awk 'BEGIN{mega=1048576} $5 >= mega {$5 = $5/mega "MB"} {print}'
