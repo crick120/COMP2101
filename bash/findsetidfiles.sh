@@ -30,4 +30,3 @@ echo ""
 echo "10 largest files found (MB):"
 echo "============="
 find / -type f -exec ls -lsh --block-size=MB {} + 2>/dev/null | sort -nr | head -10 | awk '{$2=$3=$5=$6=$7=$8=$9=""; print $0}'
-echo ""
