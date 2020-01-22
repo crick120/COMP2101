@@ -23,7 +23,7 @@ test -d ~/Pictures || mkdir ~/Pictures
 test -f ~/Pictures/pics.zip || wget -q -O ~/Pictures/pics.zip http://zonzorp.net/pics.zip
 
 # unpack the downloaded zipfile if it is there, then delete the local copy of the zipfile
-test -f ~/Pictures/pics.zip && cd ~/Pictures && unzip -q pics.zip -d ~/Pictures && rm ~/Pictures/pics.zip
+test -f ~/Pictures/pics.zip && unzip -q ~/Pictures/pics.zip -d ~/Pictures && rm ~/Pictures/pics.zip
 
 ##########################################################
 # Handle the tarfile
@@ -32,7 +32,7 @@ test -f ~/Pictures/pics.zip && cd ~/Pictures && unzip -q pics.zip -d ~/Pictures 
 test -f ~/Pictures/pics.tgz || wget -q -O ~/Pictures/pics.tgz http://zonzorp.net/pics.tgz
 
 # unpack the downloaded tarfile if it is there, then delete the local copy of the tarfile
-test -f ~/Pictures/pics.tgz && cd ~/Pictures && tar -xzf pics.tgz && rm ~/Pictures/pics.tgz
+test -f ~/Pictures/pics.tgz && tar -xzf ~/Pictures/pics.tgz && rm ~/Pictures/pics.tgz
 # Make a report on what we have in the Pictures directory
 
 test -d ~/Pictures && cat <<EOF
