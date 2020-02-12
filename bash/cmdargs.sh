@@ -55,9 +55,17 @@ while [ $# -gt 0 ];do
   echo "Shifted command line, leaving $# things left to process."
   echo "--------------------------"
   # go back to the top of the loop to see if anything is left to work on
+  debugresult=$(if [[ "$debug" == "off" ]]; then
+    echo "Debug mode is $debug."
+  else
+    echo "Debug mode is $debug and set to $debugnum."
+  fi)
 done
+
+
+
 cat << EOF
-Debug mode is $debug and set to $debugnum
+$debugresult
 Verbose mode is $verbose
 Done
 EOF
