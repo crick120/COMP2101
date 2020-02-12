@@ -4,14 +4,14 @@
 # create an empty array to put the command line arguments into
 myargs=()
 # loop through the command line arguments
+debug="off"
+verbose="off"
 while [ $# -gt 0 ];do
   # tell the user how many things are left on the command line
   echo "There are $# things left to process on the command line."
   # add whatever is in $1 to the myargs array
   myargs+=("$1")
-  helpcheck=$1
-  debug="off"
-  verbose="off"
+
   # tell the user what we did
   echo "Added \'$1\' to the arguments array"
 
@@ -20,20 +20,30 @@ while [ $# -gt 0 ];do
 #          If the help option is recognized, print out help for the command and exit
   case "$1" in
     -h|--help )
-      echo "Usage: $($basename $0) [-h|--help]"
+      helpcheck=$(basename $0)
+      echo "Usage: $helpcheck [-h|--help] [-v] [-d N]"
       exit 1
       ;;
 #          If the verbose option is recognized, set a variable to indicate verbose mode is on
     -v|--verbose )
       verbose="on"
-      echo "verbose set to on"
       ;;
 #          If the debug option is recognized, set a variable with the debug level from the number given after the -d on the command line
     -d )
       debug="on"
-      test [[ $1 == "^[0-9]+$1" ]] && echo "found mode $1" || echo "ERROR: debug not followed by a mode number; set to off"
-      ;;
-    esac
+       if [[ $# -gt 1 ]]; then
+        echo "found debug mode $2"
+        debugnum="$2"
+      else
+        echo "ERROR: debug not followed by a vaild mode number; No nummber given; shutting down program."
+        exit 2
+      fi
+      if [[ $debugnum -gt '9' ]]; then
+        echo "ERROR: debug not followed by a vaild mode number; Number greater than 9; shutting down program."
+        exit 3
+      fi
+       ;;
+     esac
 #             display an error if the user gave the -d option without a single digit number after it.)
 
 #          Anything that wasn't recognized on the command line should still go into the myargs array
@@ -46,17 +56,17 @@ while [ $# -gt 0 ];do
   echo "--------------------------"
   # go back to the top of the loop to see if anything is left to work on
 done
-if [ "$debug" == "off" ]; then
-  echo "Debug Mode is OFF."
-else
-  echo "Debug Mode is ON and set to $."
-fi
-if [ "$verbose" == "off" ]; then
-  echo "Verbose Mode is OFF"
-else
-  echo "Verbose Mode is ON"
-fi
-echo "Done"
+cat << EOF
+Debug mode is $debug and set to $debugnum
+Verbose mode is $verbose
+Done
+EOF
+echo "This was what was checked over:"
+echo "${myargs[@]}"
+###############################################
+#results
+###############################################
+
 
 # TASK2: display the settings and myargs contents
 #         Tell the user if vebose mode is on
