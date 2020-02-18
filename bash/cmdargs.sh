@@ -29,7 +29,7 @@ while [ $# -gt 0 ];do
       verbose="on"
       ;;
 #          If the debug option is recognized, set a variable with the debug level from the number given after the -d on the command line
-    -d )
+    -d|--debug )
       debug="on"
        if [[ $# -gt 1 ]]; then
         echo "found debug mode $2"
